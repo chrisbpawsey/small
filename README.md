@@ -41,7 +41,7 @@ To login to your instance the command is:
 vagrant ssh
 ```
 
-you should
+
 -----------------------
 
 ## Basic Vagrant Commands
