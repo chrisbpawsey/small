@@ -1,10 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-bootstrap = <<SCRIPT
-  useradd -m chris --groups sudo
-  su -c "printf 'cd /home/chris\nsudo su chris' >> .bash_profile" -s /bin/sh vagrant
-SCRIPT
+#bootstrap = <<SCRIPT
+#  useradd -m chris --groups sudo
+#  su -c "printf 'cd /home/chris\nsudo su chris' >> .bash_profile" -s /bin/sh vagrant
+#SCRIPT
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -75,6 +75,6 @@ SCRIPT
      
   #   apt-get install -y apache2
    SHELL
-   config.vm.host_name = "holley"
-   config.vm.provision "shell", inline: "#{bootstrap}", privileged: true
+   config.vm.host_name = "blue"
+#   config.vm.provision "shell", inline: "#{bootstrap}", privileged: true
 end
