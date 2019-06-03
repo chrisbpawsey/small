@@ -62,7 +62,7 @@
   # documentation for more information about their specific syntax and use.
    config.vm.provision "shell", inline: <<-SHELL
      apt-get update 
-     apt-get upgrade
+#     apt-get upgrade
      apt-get install -y zip 
 #     apt-get install -y libsilo-dev libsilo-bin
      git clone  https://github.com/chrisbpawsey/maali-1.5.git
