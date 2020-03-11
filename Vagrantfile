@@ -40,7 +40,7 @@
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder "../scripts", "/home/vagrant/provision"
+  config.vm.synced_folder "scripts", "/home/vagrant/provision"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -49,9 +49,9 @@
    config.vm.provider "virtualbox" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
   #   vb.gui = true
-  #
+     vb.cpus = "2"
   #   # Customize the amount of memory on the VM:
-     vb.memory = "1024"
+     vb.memory = "2048"
    end
   #
   # View the documentation for the provider you are using for more
@@ -61,17 +61,23 @@
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
    config.vm.provision "shell", inline: <<-SHELL
-     apt-get update 
+     apt-get update
 #     apt-get upgrade
-     apt-get install -y zip 
+#     apt-get install -y zip
+     apt-get install -y tcl8.6
+     ln -s /usr/bin/tclsh8.6 /usr/bin/tclsh
+     apt-get install -y environment-modules
+
 #     apt-get install -y libsilo-dev libsilo-bin
      git clone  https://github.com/chrisbpawsey/maali-1.5.git
-     wget http://swcarpentry.github.io/shell-novice/data/data-shell.zip
-     unzip data-shell.zip 
-     rm data-shell.zip
-     chown -R vagrant:vagrant data-shell
-     chown -R vagrant:vagrant maali-1.5 
-#     ./maali-1.5/install_scripts/Install_maali_vagrant.sh 
+#     wget http://swcarpentry.github.io/shell-novice/data/data-shell.zip
+#     unzip data-shell.zip
+#     rm data-shell.zip
+#     chown -R vagrant:vagrant data-shell
+     chown -R vagrant:vagrant maali-1.5
+     ./maali-1.5/install_scripts/Install_maali_vagrant.sh
+     ./maali -t maali -v 1.5g -c vagrant
+     source ~/.bashrc
      
   #   apt-get install -y apache2
    SHELL
