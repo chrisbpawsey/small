@@ -1,0 +1,37 @@
+#%Module######################################################################
+#
+# gcc modulefile
+#
+proc ModulesHelp { } {
+  puts stderr "Sets up the paths you need to use gcc version 7.4.0"
+}
+set sys     [uname sysname]
+set version 7.4.0
+set tool    gcc
+module-whatis "The GNU Compiler Collection includes front ends for C, C++, Objective-C,
+Fortran, Ada, and Go, as well as libraries for these languages (libstdc++,...).
+GCC was originally written as the compiler for the GNU operating system. The
+GNU system was developed to be 100% free software, free in the sense that it
+respects the user's freedom.
+
+For further information see https://gcc.gnu.org/
+
+"
+if { [ module-info mode load ] } {
+  if { [is-loaded $tool] && ! [is-loaded $tool/$version] } {
+    module unload $tool
+  }
+}
+
+if {! [module-info mode whatis] } {
+
+setenv       CC                   "/usr/bin/gcc"
+setenv       COMPILER             "gcc"
+setenv       COMPILER_VER         "7.4.0"
+setenv       CXX                  "/usr/bin/g++"
+setenv       F77                  "/usr/bin/gfortran"
+setenv       F90                  "/usr/bin/gfortran"
+setenv       F95                  "/usr/bin/gfortran"
+setenv       F9X                  "/usr/bin/gfortran"
+setenv       FC                   "/usr/bin/gfortran"
+}

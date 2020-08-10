@@ -1,0 +1,48 @@
+# Edit the following variables as needed
+HDF_INSTALL = /mnt/hdf/packages/hdf5/v189/Linux_2.6/hdf5-1.8.9-linux-static
+EXTLIB = -L$(HDF_INSTALL)/lib
+CC          = gcc
+CFLAGS      =
+LIB         = -lsz -lz -lm
+
+INCLUDE   = -I$(HDF_INSTALL)/include
+LIBSHDF   = $(EXTLIB) $(HDF_INSTALL)/lib/libhdf5.a
+
+all: h5_crtdat \
+     h5_rdwt \
+     h5_crtatt \
+     h5_crtgrp \
+     h5_crtgrpar \
+     h5_crtgrpd \
+
+
+h5_crtdat: h5_crtdat.c
+	$(CC) $(CFLAGS) -o $@ h5_crtdat.c $(INCLUDE) $(LIBSHDF) $(LIB)
+
+h5_rdwt: h5_rdwt.c
+	$(CC) $(CFLAGS) -o $@ h5_rdwt.c $(INCLUDE) $(LIBSHDF) $(LIB)
+
+h5_crtatt: h5_crtatt.c
+	$(CC) $(CFLAGS) -o $@ h5_crtatt.c $(INCLUDE) $(LIBSHDF) $(LIB)
+
+h5_crtgrp: h5_crtgrp.c
+	$(CC) $(CFLAGS) -o $@ h5_crtgrp.c $(INCLUDE) $(LIBSHDF) $(LIB)
+
+h5_crtgrpar: h5_crtgrpar.c
+	$(CC) $(CFLAGS) -o $@ h5_crtgrpar.c $(INCLUDE) $(LIBSHDF) $(LIB)
+
+h5_crtgrpd: h5_crtgrpd.c
+	$(CC) $(CFLAGS) -o $@ h5_crtgrpd.c $(INCLUDE) $(LIBSHDF) $(LIB)
+
+
+clean:
+	rm -f *.h5 *.o \
+        h5_crtdat \
+        h5_rdwt \
+        h5_crtatt \
+        h5_crtgrp \
+        h5_crtgrpar \
+        h5_crtgrpd \
+
+
+.SUFFIXES:.o.c
